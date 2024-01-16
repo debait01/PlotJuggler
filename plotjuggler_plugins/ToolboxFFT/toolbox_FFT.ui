@@ -146,6 +146,13 @@
          </property>
         </widget>
        </item>
+      <item>
+        <widget class="QSpinBox" name="samplingRate">
+         <property name="value">
+          <number>1</number>
+         </property>
+        </widget>
+       </item>
        <item>
         <widget class="QPushButton" name="pushButtonCalculate">
          <property name="enabled">
