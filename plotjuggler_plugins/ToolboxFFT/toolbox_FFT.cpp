@@ -156,7 +156,7 @@ void ToolboxFFT::calculateCurveFFT()
     curver_fft.clear();
     for (size_t i = 0; i < N / 2; i++)
     {
-      kiss_fft_scalar Hz = i * (1.0 / dT) / double(N) * ui->samplingRate->value;
+      kiss_fft_scalar Hz = i * (1.0 / dT) / double(N) * ui->samplingRate->value();
       kiss_fft_scalar amplitude = std::hypot(out[i].r, out[i].i) / N;
       curver_fft.pushBack({ Hz, amplitude });
     }
