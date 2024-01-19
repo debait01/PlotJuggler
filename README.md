@@ -145,6 +145,12 @@ If you need to extend any of the functionalities of PlotJuggler to cover a speci
 need or to parse your custom data formats, you can receive commercial
 support from the main author, [Davide Faconti](mailto:davide.faconti@gmail.com).
 
+# Nix
+
+```bash
+nix run --impure github:guibou/nixGL -- nix run
+```
+
 # License
 
 PlotJuggler is released under the [Mozilla Public License Version 2.0](LICENSE.md),

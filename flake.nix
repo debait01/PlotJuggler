@@ -29,7 +29,7 @@
           '';
         
           nativeBuildInputs = with pkgs; [ cmake libsForQt5.qt5.wrapQtAppsHook ];
-          buildInputs = with pkgs; [ libsForQt5.qt5.qtsvg libsForQt5.qt5.qtwebsockets mosquitto libdwarf protobuf zeromq zstd libsForQt5.qt5.qtx11extras ];
+          buildInputs = with pkgs; [ libsForQt5.qt5.qtsvg libsForQt5.qt5.qtwebsockets mosquitto libdwarf protobuf zeromq zstd libsForQt5.qt5.qtx11extras glfw glm libsForQt5.qt5.qtwayland ];
         }
       );
     in rec {
