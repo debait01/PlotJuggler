@@ -1,0 +1,13 @@
+diff --git a/CMakeLists.txt b/CMakeLists.txt
+index 8cdd2a50..115c357c 100644
+--- a/CMakeLists.txt
++++ b/CMakeLists.txt
+@@ -236,7 +236,7 @@ else()
+ 
+ endif()
+ 
+-set(DESKTOP_ICON_DIR "${CMAKE_INSTALL_PREFIX}/share/icons")
++set(DESKTOP_ICON_DIR "${CMAKE_INSTALL_PREFIX}/share/icons/hicolor/scalable/apps")
+ 
+ install(FILES ${CMAKE_CURRENT_SOURCE_DIR}/PlotJuggler.desktop
+         DESTINATION  "${CMAKE_INSTALL_PREFIX}/share/applications"  )

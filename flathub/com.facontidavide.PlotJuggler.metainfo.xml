@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<component type="desktop-application">
+  <id>com.facontidavide.PlotJuggler</id>
+
+  <name>PlotJuggler</name>
+  <summary>PlotJuggler is a tool to visualize time series that is fast, powerful and intuitive.</summary>
+
+  <metadata_license>CC0-1.0</metadata_license>
+  <project_license>MPL-2.0</project_license>
+  <content_rating type="oars-1.1" />
+
+  <description>
+    <p>
+      PlotJuggler is a tool to visualize time series that is fast, powerful and intuitive.
+    </p>
+  </description>
+
+  <releases>
+    <release version="3.8.4" date="2023-12-21"/>
+    <release version="3.7.1" date="2023-05-23"/>
+  </releases>
+
+  <launchable type="desktop-id">com.facontidavide.PlotJuggler.desktop</launchable>
+  <screenshots>
+    <screenshot type="default">
+      <image>https://plotjuggler.io/assets/images/gallery01/3ee02d8a_original.jpg</image>
+    </screenshot>
+    <screenshot>
+      <image>https://plotjuggler.io/assets/images/gallery01/58228bbe_original.jpg</image>
+    </screenshot>
+  </screenshots>
+
+  <url type="homepage">https://plotjuggler.io</url>
+  <url type="help">https://github.com/facontidavide/PlotJuggler/issues</url>
+</component>

@@ -1,0 +1,143 @@
+app-id: com.facontidavide.PlotJuggler
+runtime: org.kde.Platform
+runtime-version: 5.15-23.08
+sdk: org.kde.Sdk
+command: plotjuggler
+finish-args:
+  - --socket=wayland
+  - --socket=fallback-x11
+  - --share=ipc
+  - --device=dri
+cleanup:
+  - /include
+  - /lib/cmake
+  - /lib/pkgconfig
+  - '*.a'
+  - '*.la'
+  - /man
+  - /share/info
+  - /share/cmake
+  - /share/ffmpeg
+rename-icon: plotjuggler
+rename-desktop-file: PlotJuggler.desktop
+modules:
+  - name: plotjuggler
+    buildsystem: cmake-ninja
+    config-opts:
+      - -DCMAKE_BUILD_TYPE=RelWithDebInfo
+    sources:
+      - type: git
+        url: https://github.com/debait01/PlotJuggler.git
+        commit: f98f154491c43a4d053875a3d8dbb85626478866
+      - type: patch
+        path: patches/fix_cmake_icon_install.patch
+      - type: file
+        path: com.facontidavide.PlotJuggler.metainfo.xml
+    build-commands:
+      - install -Dm644 com.facontidavide.PlotJuggler.metainfo.xml -t "${FLATPAK_DEST}/share/metainfo"
+    modules:
+      - name: libmosquitto
+        sources:
+          - type: archive
+            url: https://mosquitto.org/files/source/mosquitto-2.0.18.tar.gz
+            sha256: d665fe7d0032881b1371a47f34169ee4edab67903b2cd2b4c083822823f4448a
+        buildsystem: cmake-ninja
+        config-opts:
+          - -DCMAKE_BUILD_TYPE=RelWithDebInfo
+          - -DWITH_CLIENTS=OFF
+          - -DWITH_BROKER=OFF
+          - -DWITH_APPS=OFF
+          - -DDOCUMENTATION=OFF
+          - -DWITH_CLIENTS=OFF
+        modules:
+          - name: cjson
+            sources:
+              - type: git
+                url: https://github.com/DaveGamble/cJSON.git
+                tag: v1.7.16
+                commit: cb8693b058ba302f4829ec6d03f609ac6f848546
+            buildsystem: cmake-ninja
+            config-opts:
+              - -DCMAKE_BUILD_TYPE=RelWithDebInfo
+              - -DENABLE_CJSON_TEST=OFF
+      - name: protobuf
+        sources:
+          - type: git
+            url: https://github.com/protocolbuffers/protobuf.git
+            tag: v25.1
+            commit: 7f94235e552599141950d7a4a3eaf93bc87d1b22
+        buildsystem: cmake-ninja
+        config-opts:
+          - -DCMAKE_BUILD_TYPE=RelWithDebInfo
+          - -DCMAKE_POSITION_INDEPENDENT_CODE=ON
+          - -Dprotobuf_BUILD_TESTS=OFF
+          - -Dprotobuf_BUILD_PROTOC_BINARIES=OFF
+      - name: libzmq
+        sources:
+          - type: git
+            url: https://github.com/zeromq/libzmq.git
+            tag: v4.3.5
+            commit: 622fc6dde99ee172ebaa9c8628d85a7a1995a21d
+        buildsystem: cmake-ninja
+        builddir: true
+        config-opts:
+          - -DCMAKE_BUILD_TYPE=RelWithDebInfo
+          - -DWITH_PERF_TOOL=OFF
+          - -DZMQ_BUILD_TESTS=OFF
+      - name: libdwarf
+        sources:
+          - type: archive
+            url: https://www.prevanders.net/libdwarf-0.8.0.tar.xz
+            sha256: 771814a66b5aadacd8381b22d8a03b9e197bd35c202d27e19fb990e9b6d27b17
+        buildsystem: cmake-ninja
+        config-opts:
+          - -DCMAKE_BUILD_TYPE=RelWithDebInfo
+          #- -DBUILD_DWARFDUMP=FALSE    # supported on main branch
+      - name: qtav
+        sources:
+          - type: git
+            url: https://github.com/wang-bin/QtAV.git
+            commit: 8bb780215bcd4a16d098a2a913d01f83b16193d7    # 20231120
+        buildsystem: cmake-ninja
+        config-opts:
+          - -DCMAKE_BUILD_TYPE=RelWithDebInfo
+          - -DCMAKE_POSITION_INDEPENDENT_CODE=ON
+          - -DBUILD_EXAMPLES=OFF
+          - -DBUILD_PLAYERS=OFF
+          - -DBUILD_TESTS=OFF
+        modules:
+          - name: ffmpeg
+            sources:
+              - type: archive
+                url: https://ffmpeg.org/releases/ffmpeg-3.4.13.tar.xz   # depends on avfiltergraph.h
+                sha256: fb6bb7f1cff858430343e449955f7c6b134fc7ffee4d1f8fcda7e686a9f2e05a
+              - type: patch
+                path: patches/fix_ffmpeg_mathops_x86_optimization.patch
+            buildsystem: autotools
+            config-opts:
+              - --disable-programs
+              - --disable-doc
+              - --disable-postproc
+              - --disable-network
+              - --disable-static
+              - --enable-shared
+          - name: cppzmq    # required by videoviewer plugin, enabled with qtav
+            sources:
+              - type: git
+                url: https://github.com/zeromq/cppzmq.git
+                tag: v4.10.0
+                commit: c94c20743ed7d4aa37835a5c46567ab0790d4acc
+            buildsystem: cmake-ninja
+            config-opts:
+              - -DCMAKE_BUILD_TYPE=RelWithDebInfo
+              - -DCPPZMQ_BUILD_TESTS=OFF
+      - name: zcm
+        sources:
+          - type: git
+            url: https://github.com/ZeroCM/zcm.git
+            commit: ddb54671a1ca4364972a1a816d2bd3761baa3daf    # 20231222
+        buildsystem: simple
+        build-commands:
+          - ./waf configure --prefix=${FLATPAK_DEST} --use-elf
+          - ./waf build
+          - ./waf install
