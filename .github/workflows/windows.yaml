@@ -1,6 +1,6 @@
 name: windows
 
-on: [push, pull_request, workflow_dispatch]
+on: [workflow_dispatch]
 
 jobs:
 
@@ -36,8 +36,8 @@ jobs:
       - name: Build Plotjuggler
         shell: pwsh
         run: >
-          cmake -Ax64 -T host=x64 -B build -DCMAKE_INSTALL_PREFIX=install PlotJuggler;
-          cmake --build build --target install
+          cmake -Ax64 -T host=x64 -B build -DCMAKE_BUILD_TYPE=Release -DCMAKE_COMPILE_WARNING_AS_ERROR=OFF -DCMAKE_INSTALL_PREFIX=install PlotJuggler;
+          cmake --build build -DCMAKE_COMPILE_WARNING_AS_ERROR=OFF -DCMAKE_BUILD_TYPE=Release --target install
       - uses: actions/upload-artifact@v3
         with:
           name: PlotJuggler
