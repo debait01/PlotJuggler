@@ -154,12 +154,12 @@
         </widget>
        </item>
        <item>
-        <widget class="QDoubleSpinBox" name="samplingRate">
+        <widget class="QSpinBox" name="samplingRate">
          <property name="value">
           <number>1.0</number>
          </property>
          <property name="maximum">
-          <number>9999999.9</number>
+          <number>2147483647</number>
          </property>
         </widget>
        </item>
