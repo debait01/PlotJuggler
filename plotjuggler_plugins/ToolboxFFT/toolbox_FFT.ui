@@ -147,7 +147,6 @@
         </widget>
        </item>
       <item>
-     <item>
         <widget class="QLabel" name="label_8">
          <property name="text">
           <string>Sampling Rate:</string>
