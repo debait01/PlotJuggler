@@ -147,7 +147,15 @@
         </widget>
        </item>
       <item>
-        <widget class="QSpinBox" name="samplingRate">
+     <item>
+        <widget class="QLabel" name="label_8">
+         <property name="text">
+          <string>Sampling Rate:</string>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QDoubleSpinBox" name="samplingRate">
          <property name="value">
           <number>1</number>
          </property>
