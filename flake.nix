@@ -17,8 +17,8 @@
           version = "0.0.1";
           src = fetchgit {
             url = "https://github.com/debait01/PlotJuggler.git";
-            rev = "b5cf75c6f8f9036d5ce5b67902744468012fa5a4";
-            sha256 = "sha256-NtgM1zYDXEJInX4if99WaYPTlDpNao4HwlNtVdV5lOs=";
+            rev = "569f1d6c4652bb4cf52f8608f781d5a88e2b5cd";
+            sha256 = "sha256-YO9EEXvXCT5m6Lv7QOTctpKbN87YS6n0XVX1ir5ImSk=";
             fetchSubmodules = true;
           };
           postPatch = ''
